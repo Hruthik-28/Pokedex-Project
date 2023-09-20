@@ -47,10 +47,10 @@ function PokemonList() {
     return (
         <div>
             <h2 className='text-3xl text-center mb-5'>Pokemon List</h2>
-            <div className='max-w-screen-2xl flex flex-wrap justify-center items-center gap-5 text-center mb-7 sm:flex-row flex-row'>
+            <div className='max-w-screen-2xl flex flex-wrap justify-center gap-3 sm:gap-5 items-center text-center mb-7 sm:flex-row flex-row'>
             {
                 (isLoading) ? "Data loading.....": 
-                pokemonList.map((poke) => <Pokemon name={poke.name} image={poke.image} key={poke.id}/>)
+                pokemonList.map((poke) => <Pokemon name={poke.name} image={poke.image} key={poke.id} id={poke.id}/>)
                 
             }
             </div>
