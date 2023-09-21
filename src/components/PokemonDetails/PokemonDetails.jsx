@@ -1,32 +1,14 @@
-import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
+import usePokemonDetails from '../../hooks/usePokemonDetails'
 
 function PokemonDetails() {
     const {id} = useParams()
-    const [pokemon, setPokemon] = useState({})
-
-    const downloadPokemon = async() => {
-        const pokemonDataResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
-        const pokemonData = await pokemonDataResponse.json()
-
-        setPokemon({
-            name: pokemonData.name,
-            height: pokemonData.height,
-            weight: pokemonData.weight,
-            image: pokemonData.sprites.other.dream_world.front_default,
-            types: pokemonData.types.map((t) => t.type.name),
-            moves: pokemonData.moves.map((movesData) => movesData).map((movesList) => movesList.move.name).slice(0, 4).join(',')
-        })
-
-    }
-
-    useEffect(() => {
-        downloadPokemon()
-    }, [])
+    const [pokemon] = usePokemonDetails(id)
+    // console.log(pokemon);
 
     return (
-        <div className='flex justify-center items-center '>
-            <div className=' p-3 shadow-xl border-2 border-gray-200 rounded-lg flex-col justify-center items-center bg-slate-200 mx-5 mt-5 sm:mt-16'>
+        <div className='flex-col justify-center  items-center sm:mx-96 '>
+            <div className=' p-3 shadow-xl border-2 border-gray-200 rounded-lg flex-col justify-center items-center bg-slate-200 mx-5 mt-2 sm:mt-5'>
                 <h1 className='text-center text-4xl font-mono font-bold mb-2'>{pokemon.name}</h1>
 
                 <div className='flex justify-center'>
@@ -55,6 +37,23 @@ function PokemonDetails() {
                         {` ${pokemon.moves}`}
                     </div>
                 </main>
+            </div>
+            <div className='text-center font-mono my-4 p-3 shadow-xl border-2 border-gray-200 bg-slate-200 rounded-lg mx-4'>
+            {
+                pokemon.types && pokemon.sameTypePokemons && 
+                <div>
+                   <h1 className='text-lg text-black'> MORE {pokemon.types[0].toUpperCase()} TYPE POKEMONS</h1>
+                    <ul>
+                    {
+                        pokemon.sameTypePokemons.map((p, idx) => 
+                            <li key={idx}> 
+                                    {p}
+                            </li>
+                        )
+                    }
+                    </ul>
+                </div>
+            }
             </div>
         </div>
     )
