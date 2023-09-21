@@ -1,9 +1,9 @@
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import usePokemonDetails from '../../hooks/usePokemonDetails'
 
-function PokemonDetails() {
+function PokemonDetails({pokemonName}) {
     const {id} = useParams()
-    const [pokemon] = usePokemonDetails(id)
+    const [pokemon] = usePokemonDetails(id, pokemonName)
     // console.log(pokemon);
 
     return (
@@ -14,7 +14,7 @@ function PokemonDetails() {
                 <div className='flex justify-center'>
                     <img 
                         src={pokemon.image} 
-                        className='hover:scale-150 cursor-pointer transition-all mb-2 '
+                        className='hover:scale-125 cursor-pointer transition-all mb-2 '
                     />
                 </div>
 
