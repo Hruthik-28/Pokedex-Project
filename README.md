@@ -38,7 +38,7 @@ Before running this project, ensure that you have the following prerequisites in
 
 1. Clone the repository to your local machine:
    ```bash
-   git clone https://github.com/your-username/pokemon-pokedex.git
+   git clone https://github.com/Hruthik-28/pokemon-pokedex.git
   
 2. Navigate to the project directory:
    ```bash
